@@ -22,16 +22,19 @@ const FeelingPage = ({ group, feeling }: FeelingPageProps) => {
 
 export default FeelingPage;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
   return {
-    paths: getFeelingsGroups()
-      .flatMap((group) => group.feelings.map(feeling => ({ group, feeling })))
-      .map(({ feeling, group }) => ({
-        params: {
-          group: group.id,
-          feeling: feeling.id
-        }
-      })),
+    paths:
+      locales.flatMap(locale =>
+        getFeelingsGroups()
+          .flatMap((group) => group.feelings.map(feeling => ({ group, feeling })))
+          .map(({ feeling, group }) => ({
+            params: {
+              group: group.id,
+              feeling: feeling.id
+            },
+            locale
+          }))),
     fallback: "blocking"
   }
 }
