@@ -12,8 +12,6 @@ interface FeelingsPageProps {
 
 const FeelingsPage = ({ group }: FeelingsPageProps) => {
   const { t } = useTranslation('feelings');
-  console.log(group.sentimentId);
-
   return (
     <MainPanel className={classNames("flex flex-col", group.sentimentId === "positive" ? "text-green-200" : "text-red-200")}>
       {group.feelings.map(value =>
@@ -32,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         group: x.id
       }
     })),
-    fallback: true, // false or "blocking"
+    fallback: "blocking"
   }
 }
 

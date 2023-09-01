@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
           feeling: feeling.id
         }
       })),
-    fallback: true, // false or "blocking"
+    fallback: "blocking"
   }
 }
 
