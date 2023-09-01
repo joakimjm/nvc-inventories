@@ -36,19 +36,10 @@ const FeelingGroupsPage = ({ groups }: FeelingGroupsPageProps) => {
 
 export default FeelingGroupsPage;
 
-export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) =>
-({
-  paths: locales.map(locale => ({
-    params: {},
-    locale
-  })),
-  fallback: "blocking"
-})
-
 export const getStaticProps: GetStaticProps<FeelingGroupsPageProps> = async ({ locale = "en" }) =>
 ({
   props: {
     groups: getSentimentGroups(),
-    ...(await serverSideTranslations(locale, ['feelings'])),
+    ...(await serverSideTranslations(locale, undefined, undefined, ["en", "da"])),
   }
 })

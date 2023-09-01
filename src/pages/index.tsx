@@ -16,18 +16,9 @@ const Home = () => {
 
 export default Home;
 
-export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) =>
-({
-  paths: locales.map(locale => ({
-    params: {},
-    locale
-  })),
-  fallback: "blocking"
-})
-
 export const getStaticProps: GetServerSideProps = async ({ locale = "en" }) =>
 ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, undefined, undefined, ["en", "da"])),
   },
 })
