@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import classNames from 'classnames'
 import { MainPanel } from '@/components/Panels'
@@ -36,7 +36,16 @@ const FeelingGroupsPage = ({ groups }: FeelingGroupsPageProps) => {
 
 export default FeelingGroupsPage;
 
-export const getStaticProps: GetStaticProps = async ({ locale = "en" }) =>
+export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) =>
+({
+  paths: locales.map(locale => ({
+    params: {},
+    locale
+  })),
+  fallback: "blocking"
+})
+
+export const getStaticProps: GetStaticProps<FeelingGroupsPageProps> = async ({ locale = "en" }) =>
 ({
   props: {
     groups: getSentimentGroups(),

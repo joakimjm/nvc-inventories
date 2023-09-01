@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetStaticPaths } from 'next'
 import { Anchor } from '@/components/Anchor'
 import { MainPanel } from '@/components/Panels'
 import { useTranslation } from 'next-i18next'
@@ -16,7 +16,16 @@ const Home = () => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale = "en" }) =>
+export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) =>
+({
+  paths: locales.map(locale => ({
+    params: {},
+    locale
+  })),
+  fallback: "blocking"
+})
+
+export const getStaticProps: GetServerSideProps = async ({ locale = "en" }) =>
 ({
   props: {
     ...(await serverSideTranslations(locale, ['common'])),
