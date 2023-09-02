@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next'
 const Home = () => {
   const { t } = useTranslation();
   return (
-    <MainPanel className='flex flex-col gap-8'>
+    <MainPanel>
       <Anchor href="/feelings">{t("feelings")}</Anchor>
       <Anchor href="#" className="opacity-20">{t("needs")}</Anchor>
     </MainPanel>

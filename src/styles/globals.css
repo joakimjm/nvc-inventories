@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+html,body {
+  @apply h-full;
+}
+
+#__next {
+  @apply h-full;
+}
